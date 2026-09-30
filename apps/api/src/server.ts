@@ -46,8 +46,8 @@ async function start(): Promise<void> {
       ) {
         lastRefreshedDate = todayDateStr;
         console.log("🌅 [Cron] Running automated Upstox TOTP token refresh for market open...");
-        const { refreshUpstoxTokenViaTOTP } = await import("./market-data/upstox-auth.service.js");
-        const res = await refreshUpstoxTokenViaTOTP();
+        const { loginViaPlaywright } = await import("./market-data/upstox-auth.service.js");
+        const res = await loginViaPlaywright();
         if (res.success) {
           console.log(`✅ [Cron] Upstox Live Token refreshed for ${res.userName || "market session"}!`);
         } else {
