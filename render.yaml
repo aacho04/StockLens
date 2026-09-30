@@ -1,0 +1,64 @@
+version: "1"
+
+services:
+  # ─── API Web Service (Node.js + WebSockets) ─────────────────────────────────
+  - type: web
+    name: stocklens-api
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: pnpm install --frozen-lockfile && pnpm --filter @stocklens/types build && pnpm --filter @stocklens/validators build && pnpm --filter @stocklens/api build
+    startCommand: pnpm --filter @stocklens/api db:migrate && pnpm --filter @stocklens/api start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4000"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: stocklens-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: REFRESH_TOKEN_SECRET
+        generateValue: true
+      - key: MARKET_DATA_PROVIDER
+        value: upstox
+      - key: UPSTOX_ACCESS_TOKEN
+        sync: false
+      - key: CORS_ORIGINS
+        value: "*"
+
+  # ─── Web Frontend (React + Vite SPA) ────────────────────────────────────────
+  - type: web
+    name: stocklens-web
+    runtime: static
+    plan: free
+    region: oregon
+    buildCommand: pnpm install --frozen-lockfile && pnpm --filter @stocklens/types build && pnpm --filter @stocklens/validators build && pnpm --filter @stocklens/web build
+    staticPublishPath: apps/web/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: stocklens-api
+          property: host
+          value: https://$VALUE/api
+      - key: VITE_WS_URL
+        fromService:
+          type: web
+          name: stocklens-api
+          property: host
+          value: wss://$VALUE/ws
+
+databases:
+  # ─── Managed PostgreSQL Database ────────────────────────────────────────────
+  - name: stocklens-db
+    plan: free
+    region: oregon
+    databaseName: stocklens
+    user: stocklens

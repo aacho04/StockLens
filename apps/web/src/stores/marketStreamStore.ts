@@ -32,8 +32,19 @@ export const useMarketStreamStore = create<MarketStreamState>((set, get) => ({
       return;
     }
 
-    const host = window.location.hostname || "localhost";
-    const wsUrl = `ws://${host}:4000/ws`;
+    let wsUrl = import.meta.env.VITE_WS_URL;
+    if (!wsUrl) {
+      const isHttps = window.location.protocol === "https:";
+      const proto = isHttps ? "wss:" : "ws:";
+      const host = window.location.hostname || "localhost";
+      const port =
+        window.location.port === "5173" || window.location.port === "3000"
+          ? ":4000"
+          : window.location.port
+          ? `:${window.location.port}`
+          : "";
+      wsUrl = `${proto}//${host}${port}/ws`;
+    }
 
     try {
       socket = new WebSocket(wsUrl);

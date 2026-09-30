@@ -106,7 +106,7 @@ export async function syncRealMarketPrices(): Promise<{ updated: number; timesta
         client.ws.send(snapMsg);
 
         // Broadcast individual tick events so client flash & charts move immediately during live session
-        if (isMarketOpen() || process.env.SIMULATE_OFF_MARKET === "true") {
+        if (isMarketOpen() || process.env["SIMULATE_OFF_MARKET"] === "true") {
           for (const t of changedTicks) {
             if (client.symbols.size === 0 || client.symbols.has(t.symbol) || client.focusedSymbols.has(t.symbol)) {
               client.ws.send(
@@ -230,7 +230,7 @@ export function initWebSocketServer(server: Server): WebSocketServer {
     if (clients.size === 0) return;
 
     // Freeze prices when Indian stock market is closed (09:15 - 15:30 IST Monday-Friday)
-    if (!isMarketOpen() && process.env.SIMULATE_OFF_MARKET !== "true") {
+    if (!isMarketOpen() && process.env["SIMULATE_OFF_MARKET"] !== "true") {
       return;
     }
 
