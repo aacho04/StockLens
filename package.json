@@ -13,6 +13,7 @@
     "db:seed": "turbo db:seed --filter=@stocklens/api",
     "db:studio": "pnpm --filter=@stocklens/api db:studio",
     "token:upstox": "pnpm --filter @stocklens/api token:upstox",
+    "token:auto": "pnpm --filter @stocklens/api token:auto",
     "ml:dev": "apps\\ml\\venv\\Scripts\\uvicorn main:app --reload --host 0.0.0.0 --port 8000 --app-dir apps/ml",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,md,yaml,css}\""
   },

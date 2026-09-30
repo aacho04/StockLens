@@ -16,7 +16,8 @@
     "db:migrate": "tsx src/db/migrate.ts",
     "db:seed": "tsx src/db/seed.ts",
     "db:studio": "drizzle-kit studio",
-    "token:upstox": "tsx scripts/get-upstox-token.ts"
+    "token:upstox": "tsx scripts/get-upstox-token.ts",
+    "token:auto": "tsx scripts/auto-login-upstox.ts"
   },
   "dependencies": {
     "@stocklens/types": "workspace:*",

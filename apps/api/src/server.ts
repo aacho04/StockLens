@@ -24,6 +24,39 @@ async function start(): Promise<void> {
   // Attach WebSocket Server
   const wss = initWebSocketServer(server);
 
+  // ─── Automated Morning Upstox Token Refresh (Every weekday at 08:45 AM IST) ─
+  if (process.env["UPSTOX_TOTP_SECRET"] && process.env["UPSTOX_PIN"]) {
+    console.log("🛡️  Automated daily Upstox TOTP refresh active (08:45 AM IST scheduled)");
+
+    let lastRefreshedDate = "";
+    setInterval(async () => {
+      const now = new Date();
+      const istMinutes = now.getUTCHours() * 60 + now.getUTCMinutes() + 330;
+      const currentMinutes = istMinutes % (24 * 60);
+      const dayOfWeek = (now.getUTCDay() + Math.floor(istMinutes / (24 * 60))) % 7;
+      const todayDateStr = now.toISOString().split("T")[0]!;
+
+      // Mon-Fri, between 08:45 AM and 08:59 AM IST, run once per day
+      if (
+        dayOfWeek >= 1 &&
+        dayOfWeek <= 5 &&
+        currentMinutes >= 8 * 60 + 45 &&
+        currentMinutes <= 8 * 60 + 59 &&
+        lastRefreshedDate !== todayDateStr
+      ) {
+        lastRefreshedDate = todayDateStr;
+        console.log("🌅 [Cron] Running automated Upstox TOTP token refresh for market open...");
+        const { refreshUpstoxTokenViaTOTP } = await import("./market-data/upstox-auth.service.js");
+        const res = await refreshUpstoxTokenViaTOTP();
+        if (res.success) {
+          console.log(`✅ [Cron] Upstox Live Token refreshed for ${res.userName || "market session"}!`);
+        } else {
+          console.warn("⚠️ [Cron] Upstox token refresh error:", res.error);
+        }
+      }
+    }, 60 * 1000); // check every minute
+  }
+
   // ─── Graceful Shutdown ───────────────────────────────────────────────
   async function shutdown(signal: string): Promise<void> {
     console.log(`\n⚠️   ${signal} received — shutting down gracefully...`);
