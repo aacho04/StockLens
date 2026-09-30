@@ -19,6 +19,22 @@ interface LivePriceState {
   anchorPrice?: number; // authoritative real market price from Upstox API
 }
 
+export function isMarketOpen(): boolean {
+  const now = new Date();
+  // IST is UTC + 5:30 (330 minutes)
+  const istMinutes = now.getUTCHours() * 60 + now.getUTCMinutes() + 330;
+  const currentMinutes = istMinutes % (24 * 60);
+  const dayOfWeek = (now.getUTCDay() + Math.floor(istMinutes / (24 * 60))) % 7;
+  const marketOpen = 9 * 60 + 15; // 09:15 IST
+  const marketClose = 15 * 60 + 30; // 15:30 IST
+
+  // Monday (1) through Friday (5)
+  if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+    return currentMinutes >= marketOpen && currentMinutes < marketClose;
+  }
+  return false;
+}
+
 const livePriceBook = new Map<string, LivePriceState>();
 const clients = new Set<ClientSubscription>();
 
@@ -89,17 +105,19 @@ export async function syncRealMarketPrices(): Promise<{ updated: number; timesta
       if (client.ws.readyState === WebSocket.OPEN) {
         client.ws.send(snapMsg);
 
-        // Broadcast individual tick events so client flash & charts move immediately
-        for (const t of changedTicks) {
-          if (client.symbols.size === 0 || client.symbols.has(t.symbol) || client.focusedSymbols.has(t.symbol)) {
-            client.ws.send(
-              JSON.stringify({
-                type: "tick",
-                symbol: t.symbol,
-                tickDirection: t.direction,
-                data: t.quote,
-              })
-            );
+        // Broadcast individual tick events so client flash & charts move immediately during live session
+        if (isMarketOpen() || process.env.SIMULATE_OFF_MARKET === "true") {
+          for (const t of changedTicks) {
+            if (client.symbols.size === 0 || client.symbols.has(t.symbol) || client.focusedSymbols.has(t.symbol)) {
+              client.ws.send(
+                JSON.stringify({
+                  type: "tick",
+                  symbol: t.symbol,
+                  tickDirection: t.direction,
+                  data: t.quote,
+                })
+              );
+            }
           }
         }
       }
@@ -210,6 +228,11 @@ export function initWebSocketServer(server: Server): WebSocketServer {
   // ─── Real-Time Tick Streaming Loop (Upstox / TradingView 1000ms Ticks) ─────────
   const tickInterval = setInterval(() => {
     if (clients.size === 0) return;
+
+    // Freeze prices when Indian stock market is closed (09:15 - 15:30 IST Monday-Friday)
+    if (!isMarketOpen() && process.env.SIMULATE_OFF_MARKET !== "true") {
+      return;
+    }
 
     // 1. Gather all actively focused symbols from all connected clients
     const symbolsToTick = new Set<string>();
