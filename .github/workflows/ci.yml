@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  NODE_VERSION: "22"
+  PNPM_VERSION: "10"
+
+jobs:
+  ci:
+    name: Type Check, Lint & Test
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: stocklens
+          POSTGRES_PASSWORD: stocklens
+          POSTGRES_DB: stocklens_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check (all packages)
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+        continue-on-error: true # non-blocking in early phases
+
+      - name: Run tests
+        run: pnpm test
+        env:
+          DATABASE_URL: postgresql://stocklens:stocklens@localhost:5432/stocklens_test
+          JWT_SECRET: test-jwt-secret-that-is-at-least-32-characters-long
+          REFRESH_TOKEN_SECRET: test-refresh-secret-that-is-at-least-32-chars
+          NODE_ENV: test
+          MARKET_DATA_PROVIDER: mock
+
+      - name: Build check
+        run: pnpm build
+        env:
+          DATABASE_URL: postgresql://stocklens:stocklens@localhost:5432/stocklens_test
+          JWT_SECRET: test-jwt-secret-that-is-at-least-32-characters-long
+          REFRESH_TOKEN_SECRET: test-refresh-secret-that-is-at-least-32-chars
+          NODE_ENV: test
+          MARKET_DATA_PROVIDER: mock

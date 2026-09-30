@@ -1,0 +1,346 @@
+{
+  "NIFTY": {
+    "price": 22716.85,
+    "close": 22716.85
+  },
+  "NIFTY 50": {
+    "price": 22716.85,
+    "close": 22716.85
+  },
+  "BANKNIFTY": {
+    "price": 54535.25,
+    "close": 54535.25
+  },
+  "FINNIFTY": {
+    "price": 24621.5,
+    "close": 24621.5
+  },
+  "SENSEX": {
+    "price": 72654.61,
+    "close": 72654.61
+  },
+  "MIDCPNIFTY": {
+    "price": 13830.65,
+    "close": 13830.65
+  },
+  "RELIANCE": {
+    "price": 1190.9,
+    "close": 1190.9
+  },
+  "TCS": {
+    "price": 2080.3,
+    "close": 2080.3
+  },
+  "HDFCBANK": {
+    "price": 712,
+    "close": 712
+  },
+  "INFY": {
+    "price": 1005.7,
+    "close": 1005.7
+  },
+  "ICICIBANK": {
+    "price": 1306.3,
+    "close": 1306.3
+  },
+  "HINDUNILVR": {
+    "price": 1879,
+    "close": 1879
+  },
+  "BHARTIARTL": {
+    "price": 1772.7,
+    "close": 1772.7
+  },
+  "SBIN": {
+    "price": 967.8,
+    "close": 967.8
+  },
+  "WIPRO": {
+    "price": 159.84,
+    "close": 159.84
+  },
+  "HCLTECH": {
+    "price": 1240.5,
+    "close": 1240.5
+  },
+  "BAJFINANCE": {
+    "price": 969.1,
+    "close": 969.1
+  },
+  "MARUTI": {
+    "price": 11962,
+    "close": 11962
+  },
+  "LT": {
+    "price": 3771.7,
+    "close": 3771.7
+  },
+  "ASIANPAINT": {
+    "price": 2428.5,
+    "close": 2428.5
+  },
+  "AXISBANK": {
+    "price": 1206.8,
+    "close": 1206.8
+  },
+  "SUNPHARMA": {
+    "price": 1838.7,
+    "close": 1838.7
+  },
+  "TITAN": {
+    "price": 4653,
+    "close": 4653
+  },
+  "ULTRACEMCO": {
+    "price": 10915,
+    "close": 10915
+  },
+  "KOTAKBANK": {
+    "price": 409.6,
+    "close": 409.6
+  },
+  "POWERGRID": {
+    "price": 260.95,
+    "close": 260.95
+  },
+  "NTPC": {
+    "price": 322.5,
+    "close": 322.5
+  },
+  "ONGC": {
+    "price": 231.04,
+    "close": 231.04
+  },
+  "NESTLEIND": {
+    "price": 1336.7,
+    "close": 1336.7
+  },
+  "ITC": {
+    "price": 265.55,
+    "close": 265.55
+  },
+  "DRREDDY": {
+    "price": 1220.9,
+    "close": 1220.9
+  },
+  "BAJAJFINSV": {
+    "price": 1744.2,
+    "close": 1744.2
+  },
+  "TATAMOTORS": {
+    "price": 281.25,
+    "close": 281.25
+  },
+  "JSWSTEEL": {
+    "price": 1263,
+    "close": 1263
+  },
+  "ADANIPORTS": {
+    "price": 1797.6,
+    "close": 1797.6
+  },
+  "TATACONSUM": {
+    "price": 963.9,
+    "close": 963.9
+  },
+  "TATASTEEL": {
+    "price": 188.4,
+    "close": 188.4
+  },
+  "HINDALCO": {
+    "price": 949,
+    "close": 949
+  },
+  "COALINDIA": {
+    "price": 428.3,
+    "close": 428.3
+  },
+  "TECHM": {
+    "price": 1539.8,
+    "close": 1539.8
+  },
+  "HDFCLIFE": {
+    "price": 517.65,
+    "close": 517.65
+  },
+  "SBILIFE": {
+    "price": 1713.3,
+    "close": 1713.3
+  },
+  "DIVISLAB": {
+    "price": 9397.5,
+    "close": 9397.5
+  },
+  "CIPLA": {
+    "price": 1376.4,
+    "close": 1376.4
+  },
+  "GRASIM": {
+    "price": 3108.5,
+    "close": 3108.5
+  },
+  "HEROMOTOCO": {
+    "price": 5301.5,
+    "close": 5301.5
+  },
+  "EICHERMOT": {
+    "price": 7178,
+    "close": 7178
+  },
+  "BAJAJ-AUTO": {
+    "price": 10840,
+    "close": 10840
+  },
+  "M&M": {
+    "price": 2961.5,
+    "close": 2961.5
+  },
+  "BPCL": {
+    "price": 306.75,
+    "close": 306.75
+  },
+  "IOC": {
+    "price": 135.2,
+    "close": 135.2
+  },
+  "INDUSINDBK": {
+    "price": 893,
+    "close": 893
+  },
+  "APOLLOHOSP": {
+    "price": 8536,
+    "close": 8536
+  },
+  "ADANIENT": {
+    "price": 2953,
+    "close": 2953
+  },
+  "ADANIGREEN": {
+    "price": 1272.6,
+    "close": 1272.6
+  },
+  "ADANITRANS": {
+    "price": 1332,
+    "close": 1332
+  },
+  "SIEMENS": {
+    "price": 3759.3,
+    "close": 3759.3
+  },
+  "ABB": {
+    "price": 6858.5,
+    "close": 6858.5
+  },
+  "BOSCHLTD": {
+    "price": 46595,
+    "close": 46595
+  },
+  "MCDOWELL-N": {
+    "price": 1353.4,
+    "close": 1353.4
+  },
+  "PAGEIND": {
+    "price": 36765,
+    "close": 36765
+  },
+  "PIDILITIND": {
+    "price": 1489.1,
+    "close": 1489.1
+  },
+  "BERGEPAINT": {
+    "price": 456.1,
+    "close": 456.1
+  },
+  "HAVELLS": {
+    "price": 1052.3,
+    "close": 1052.3
+  },
+  "DMART": {
+    "price": 3835.9,
+    "close": 3835.9
+  },
+  "NYKAA": {
+    "price": 329.75,
+    "close": 329.75
+  },
+  "POLICYBZR": {
+    "price": 1078.5,
+    "close": 1078.5
+  },
+  "PAYTM": {
+    "price": 1700.6,
+    "close": 1700.6
+  },
+  "IRFC": {
+    "price": 79.09,
+    "close": 79.09
+  },
+  "IRCTC": {
+    "price": 457.55,
+    "close": 457.55
+  },
+  "HAL": {
+    "price": 4661,
+    "close": 4661
+  },
+  "BEL": {
+    "price": 387.2,
+    "close": 387.2
+  },
+  "MUTHOOTFIN": {
+    "price": 2763.2,
+    "close": 2763.2
+  },
+  "CHOLAFIN": {
+    "price": 1632.8,
+    "close": 1632.8
+  },
+  "FEDERALBNK": {
+    "price": 323.85,
+    "close": 323.85
+  },
+  "BANDHANBNK": {
+    "price": 183.12,
+    "close": 183.12
+  },
+  "PNB": {
+    "price": 113.76,
+    "close": 113.76
+  },
+  "CANBK": {
+    "price": 121.37,
+    "close": 121.37
+  },
+  "BANKBARODA": {
+    "price": 234.62,
+    "close": 234.62
+  },
+  "TATAPOWER": {
+    "price": 359.6,
+    "close": 359.6
+  },
+  "TORNTPHARM": {
+    "price": 4904,
+    "close": 4904
+  },
+  "LUPIN": {
+    "price": 2057.3,
+    "close": 2057.3
+  },
+  "AUROPHARMA": {
+    "price": 1698.9,
+    "close": 1698.9
+  },
+  "BIOCON": {
+    "price": 379.85,
+    "close": 379.85
+  },
+  "GMRINFRA": {
+    "price": 94.55,
+    "close": 94.55
+  },
+  "INDIGO": {
+    "price": 4950,
+    "close": 4950
+  }
+}

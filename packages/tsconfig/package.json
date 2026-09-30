@@ -1,0 +1,7 @@
+{
+  "name": "@stocklens/tsconfig",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Shared TypeScript configurations for StockLens",
+  "files": ["base.json", "node.json", "react.json"]
+}
